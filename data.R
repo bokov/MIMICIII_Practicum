@@ -39,7 +39,7 @@ source('config.R',local=T,echo=debug>0);
 # );
 
 # Load libraries ----
-library(rio); library(dplyr);   # data handling
+library(rio); library(dplyr); library(tidyr); # data handling
 library(printr); # printing tables inline
 
 
@@ -61,10 +61,38 @@ if(length(setdiff(c('ADMISSIONS.csv','CALLOUT.csv','CAREGIVERS.csv','CHARTEVENTS
   unzip('data/mimic_iii.zip',exdir='data');
 }
 
-#' # Data exploration
 # Example of how to import individual tables into R after downloading
 ADMISSIONS <- import(file.path(dataextractdir,'ADMISSIONS.csv'));
 PATIENTS <- import(file.path(dataextractdir,'PATIENTS.csv'));
 DIAGNOSES_ICD <- import(file.path(dataextractdir,'DIAGNOSES_ICD.csv'));
-# Example of examining the frequencies of a discrete variable
+CPTEVENTS <- import(file.path(dataextractdir,'CPTEVENTS.csv'));
+MICROBIOLOGYEVENTS <- import(file.path(dataextractdir,'MICROBIOLOGYEVENTS.csv'));
+LABEVENTS <- import(file.path(dataextractdir,'LABEVENTS.csv'));
+D_LABITEMS <- import(file.path(dataextractdir,'D_LABITEMS.csv'));
+
+#' # Data transformation
+#'
+#' These tables seem to behave like a relational database-- different types of
+#' data get their own tables, to be joined as needed based on columns that end
+#' in the suffix `_id`. When there are many variables, e.g. different types of
+#' diagnoses, the data is in tall-skinny format. I.e. instead of one column per
+#' diagnosis code, there is one column for all the codes. Random forest needs
+#' to have each variable in its own column and each subject in its own row. So
+#' here is an example of how we can use the `pivot_wider()` to transform the
+#' data from tall format to wide format.
+#'
+#+ diagnoses_pivot
+dat0 <- select(DIAGNOSES_ICD,c('subject_id','hadm_id','icd9_code')) %>%
+  mutate('obs'=1) %>%
+  pivot_wider(names_from=icd9_code # this is the column that gets split into individual columns
+              ,names_prefix = 'ICD9_',values_fill = 0
+              ,values_from = obs # this is the column that says how many cases were observed (for diagnoses always 1)
+              ) %>% arrange(subject_id,hadm_id);
+head(dat0);
+
+#' # Data exploration
+#'
+#'  Example of examining the frequencies of a discrete variable
+
+
 table(ADMISSIONS$diagnosis) %>% sort(decreasing = T) %>% cbind %>% head(14)
