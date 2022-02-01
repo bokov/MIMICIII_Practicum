@@ -1,0 +1,214 @@
+/*
+ * I add this to html files generated with pandoc.
+ * From original CSS file written by Pascal Hertleif
+ * https://gist.github.com/killercup/5917178/40840de5352083adb2693dc742e9f75dbb18650f
+ */
+
+html {
+  font-size: 100%;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  color: #444;
+  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  font-size: 12.5px;
+  /*
+  line-height: 1.7;
+  padding: 1em;
+  margin: auto;
+  max-width: 42em;
+  */
+  background: #fefefe;
+  text-align: justify;
+  text-justify: inter-character;
+}
+
+a {
+  color: #0645ad;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #0b0080;
+}
+
+a:hover {
+  color: #06e;
+}
+
+a:active {
+  color: #faa700;
+}
+
+a:focus {
+  outline: thin dotted;
+}
+
+*::-moz-selection {
+  background: rgba(255, 255, 0, 0.3);
+  color: #000;
+}
+
+*::selection {
+  background: rgba(255, 255, 0, 0.3);
+  color: #000;
+}
+
+a::-moz-selection {
+  background: rgba(255, 255, 0, 0.3);
+  color: #0645ad;
+}
+
+a::selection {
+  background: rgba(255, 255, 0, 0.3);
+  color: #0645ad;
+}
+
+.title, .author, .date, .subtitle {
+  text-align: center;
+}
+
+/* you have to be really specific to override an explicit em but it can be done */
+.subtitle em {
+  font-style: normal;
+}
+
+h3.subtitle,.date,div.abstract {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+h1,h2,h3,h4 {
+  font-weight: 500;
+  margin-top: 25px; margin-bottom: 5px;
+  page-break-after: avoid;
+}
+
+.table-condensed {
+  margin-top: 20px;
+}
+
+
+/* otherwise the title h1 doesn't inherit the fontsize correctly */
+h1,h1.title {
+  font-size: 1.8em;
+}
+
+h2 {
+  font-size: 1.4em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+h4 {
+  font-size: 1.1em;
+}
+
+h5 {
+  font-size: 1em;
+  font-style: italic;
+}
+
+h6,.pbreak {
+  font-style: italic;
+  display: none;
+}
+
+tbody {
+  vertical-align: top;
+}
+
+#toc table {
+  width: 180%;
+}
+
+#toc h1 {
+  display: none;
+}
+
+/*
+p.abstract {
+    color: red;
+    line-height: 0;
+    text-indent: -99999px;
+}
+
+p.abstract:after {
+    line-height: initial;
+    color: initial;
+    text-indent: initial;
+    display: block;
+    visibility: visible;
+    content: 'Latest Developments';
+}
+*/
+
+.figure .caption, .subfigures > p:last-of-type, figcaption {
+    color: #777;
+    padding-bottom: 16px;
+    padding-top: 0;
+    text-align: justify;
+    text-justify: inter-character;
+}
+
+.comment-start {
+  background-color: #FFB;
+  display:  none;
+  float: right;
+  position: relative;
+  width: 18vw;
+  margin-right: -19vw;
+  /* The following were attempts to fix comments running into each other
+  margin-top: -5vw;
+  margin-bottom: -5vw;
+  overflow-y: scroll;
+  font-size: x-small;
+  */
+}
+
+.redtext {color: #F00;}
+.bluetext {color: #00F;}
+.greentext {color: #277014;}
+.orangetext {color: #FFA500;}
+.purpletext {color: #800080;}
+.browntext {color: #D2691E;}
+
+.note2self {
+  background-color: #FF0;
+}
+
+.note2team {
+  background-color: #FCC;
+}
+
+
+.table caption {
+    color: #777;
+    margin-top: 15px;
+    padding-bottom: 0;
+    text-align: justify;
+    text-justify: inter-character;
+}
+
+.table caption .table_title {
+    color: #000;
+    font-weight: 800;
+}
+
+
+table.Rtable1 { font-family:  Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;}
+
+@media print {
+  #TOC { display: none;}
+
+  .toc-content {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
