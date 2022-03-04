@@ -1,6 +1,6 @@
 #' ---
 #' title: "MIMIC-III: Infectious Disease ICU Mortality"
-#' author: 'Gabriel Catano'
+#' author: 'Gabriel Catano11'
 #' abstract: |
 #'   | Merging and cleanup of CMS and Census data, with some preliminary
 #'   | unsupervised variable selection
