@@ -41,6 +41,13 @@ source('config.R',local=T,echo=debug>0);
 # Load libraries ----
 library(rio); library(dplyr); library(tidyr); # data handling
 library(printr); # printing tables inline
+library(rsample); # sampling
+
+
+# Project Variables
+
+PROP_TRAIN <- 0.6
+
 
 
 # Local project settings ----
@@ -90,9 +97,24 @@ dat0 <- select(DIAGNOSES_ICD,c('subject_id','hadm_id','icd9_code')) %>%
               ) %>% arrange(subject_id,hadm_id);
 head(dat0);
 
+#' # Splitting into test and train
+#'
+#+ data_split
+set.seed(.projectseed)
+PATIENTS_split <- initial_split(PATIENTS,
+                                prop = PROP_TRAIN,
+                                strata = NULL)
+
+train_data <- training(PATIENTS_split)
+test_data  <- testing(PATIENTS_split)
+
+
+
 #' # Data exploration
 #'
 #'  Example of examining the frequencies of a discrete variable
 
 
 table(ADMISSIONS$diagnosis) %>% sort(decreasing = T) %>% cbind %>% head(14)
+
+save.image('data.R.rdata');

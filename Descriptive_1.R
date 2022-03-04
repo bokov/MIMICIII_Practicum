@@ -2,6 +2,9 @@ library(tableone)
 library(lubridate)
 library(dplyr)
 
+if(!file.exists('data.R.rdata')) system('R -f data.R',ignore.stdout = T,ignore.stderr = T,wait = T);
+load('data.R.rdata');
+
 data_dem_admi <- ADMISSIONS %>%
   group_by(subject_id) %>%
   summarize(insurance = first(insurance),
