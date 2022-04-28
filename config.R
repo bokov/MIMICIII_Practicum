@@ -5,3 +5,4 @@ PROJECTID <- 'mimiciii-6203-2022';
 SQLQUERY00 <- sprintf('SELECT *
                       FROM `%s.initial_characterization.mp_allpatients`
                       WHERE age >= 18',PROJECTID);
+inputdata <- file.path('data','cached_data.rdata');
